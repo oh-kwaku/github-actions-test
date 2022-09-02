@@ -1,3 +1,16 @@
-name: Shell commands 
+name: Shell commands # workflow name
 
-on: [push, pull] 
+on: [push] # events that trigger workflow
+
+jobs: 
+  run-shell-command: #job object 
+    runs-on: ubuntu-latest # environment that this job should run on
+    steps:  # actions performed at this step
+      - name: echo a string    # step name
+        run: echo "Hellow world" /  # command to perform
+      - name: multiline script  # another step name
+        run: |   # to run multiple commands use pipe character "|"
+          node -v 
+          npm -v
+
+    
