@@ -12,5 +12,10 @@ jobs:
         run: |   # to run multiple commands use pipe character "|"
           node -v 
           npm -v
+      - name: python command
+        run: |
+          import platform
+          print(platform.processor())
+        shell: python
 
     
