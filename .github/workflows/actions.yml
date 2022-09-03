@@ -14,12 +14,13 @@ jobs:
         # NB: using branch might fail because it might contain breaking changes. Using version might help
         # Using a commit ID is the safest because it will never change
         #
-        uses: actions/hellow-world-javascript-action@v1
+        uses: actions/hello-world-javascript-action@v1
 
         # the "with" key parameter is used to provide input to an action
         with:
           # here, we're providing value to who-to-greet key that is expected by the action
           who-to-greet: Kwaku
       - name: log Greetin time
-        run: echo "${{steps.greet.outputs.time}}"  # we're echoing the time of when step with id "greet" was executed. 
+        run: echo "${{steps.greet.outputs.time}}"  # we're echoing the time of when step with id "greet" was executed.  
+
         
