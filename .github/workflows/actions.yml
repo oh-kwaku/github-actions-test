@@ -1,5 +1,11 @@
 # actions are code or task that is already available and can be used in a workflow. Actions can be from an existing file or a repo
 
+
+# environment variables 
+# $GITHUB_SHA   commit id of the specific commit that triggered the workflow
+# $GITHUB_REPOSITORY : the username and rpeository name
+# $GITHUB_WORKSPACE : the workspace directory in which we're currently executing
+# github.token
 name: actions workflow
 
 on: [push]
@@ -12,6 +18,9 @@ jobs:
         run: |
             pwd
             ls  
+            echo $GITHUB_SHA 
+            echo $GITHUB_REPOSITORY
+            echo $GITHUB_WORKSPACE
       - name : checkout
       # By default github does not clone a repo into the director of the virtual machine that the runner is using becuase
       # the files in the repo might not be needed by an action.
