@@ -8,6 +8,11 @@ jobs:
   run-github-actions:
     runs-on: ubuntu-latest
     steps:
+      - name: "list files"
+        run: |
+            pwd
+            ls  
+            
       - name: hellow world js actions 
         id: greet # if wee need to reference a step in another it should be given an id
 
