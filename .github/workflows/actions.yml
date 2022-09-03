@@ -5,7 +5,7 @@
 # $GITHUB_SHA   commit id of the specific commit that triggered the workflow
 # $GITHUB_REPOSITORY : the username and rpeository name
 # $GITHUB_WORKSPACE : the workspace directory in which we're currently executing
-# github.token
+# github.token #
 name: actions workflow
 
 on: [push, pull_request]
