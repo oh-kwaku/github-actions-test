@@ -12,6 +12,16 @@ jobs:
         run: |
             pwd
             ls  
+      - name : checkout
+      # By default github does not clone a repo into the director of the virtual machine that the runner is using becuase
+      # the files in the repo might not be needed by an action.
+      # We need to checkout into the commit of a repo that the workflow needs
+      # we could have used git cli to do that eg git clone or etc. but actions/checout make it easier
+        uses: actions/checkout@v1
+      - name: list files after checkout
+        run: |
+          pwd
+          ls -a
             
       - name: hellow world js actions 
         id: greet # if wee need to reference a step in another it should be given an id
