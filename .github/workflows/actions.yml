@@ -8,7 +8,11 @@
 # github.token #
 name: actions workflow
 
-on: [push, pull_request]
+on:  # we need to specify event as object instead of array so that we can set the specific type of event that triggers the workflow
+  push: # push does not have any type
+  pull_request:
+    types: [closed, assigned, opened, reopened]
+
 
 jobs:
   run-github-actions:
