@@ -1,0 +1,25 @@
+name: actions workflow
+
+on: [push]
+
+jobs:
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hellow world js actions 
+        id: greet # if wee need to reference a step in another it should be given an id
+
+        # reference to an action; here we're using an action that is published on public github repo.
+        # you can use a branch name after "@" eg. action@master
+        # NB: using branch might fail because it might contain breaking changes. Using version might help
+        # Using a commit ID is the safest because it will never change
+        #
+        uses: actions/hellow-world-javascript-action@v1
+
+        # the "with" key parameter is used to provide input to an action
+        with:
+          # here, we're providing value to who-to-greet key that is expected by the action
+          who-to-greet: Kwaku
+      - name: log Greetin time
+        run: echo "${{steps.greet.outputs.time}}"  # we're echoing the time of when step with id "greet" was executed. 
+        
