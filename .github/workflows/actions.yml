@@ -18,8 +18,11 @@ jobs:
         run: |
             pwd
             ls  
+            echo "GITHUB_SHA env. variable"
             echo $GITHUB_SHA 
+            echo "GITHUB_REPOSITORY env. variable"
             echo $GITHUB_REPOSITORY
+            echo  "GITHUB_WORKSPACE  env. variable"
             echo $GITHUB_WORKSPACE
       - name : checkout
       # By default github does not clone a repo into the director of the virtual machine that the runner is using becuase
