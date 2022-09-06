@@ -9,7 +9,11 @@
 name: actions workflow
 
 on:  # we need to specify event as object instead of array so that we can set the specific type of event that triggers the workflow
-  push: # push does not have any type
+ # push: # push does not have any type
+  schedule:
+  # this has the template of ( * * * * *) minute hour day month [day of week]. Check www.crontab.guru for usage
+    -  cron: "0/5 * * * *"  # this runs every  5 minues
+    - cron: "0/6 * * * *" # this runs every 6 minutes
   pull_request:
     types: [closed, assigned, opened, reopened]
 
