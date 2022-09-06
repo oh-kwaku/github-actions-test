@@ -10,10 +10,12 @@ name: actions workflow
 
 on:  # we need to specify event as object instead of array so that we can set the specific type of event that triggers the workflow
  # push: # push does not have any type
-  schedule:
-  # this has the template of ( * * * * *) minute hour day month [day of week]. Check www.crontab.guru for usage
-    -  cron: "0/5 * * * *"  # this runs every  5 minues
-    - cron: "0/6 * * * *" # this runs every 6 minutes
+  #schedule:
+    ## this has the template of ( * * * * *) minute hour day month [day of week]. Check www.crontab.guru for usage
+    ## NB: the shortest interval  is once every 5 minutes
+   # -  cron: "0/5 * * * *"  # this runs every  5 minues
+  #  - cron: "0/6 * * * *" # this runs every 6 minutes
+  repository_dispatch: # this fires everytime a post request is sent to  a repo url (eg. github.com/username/repo/dispatch)
   pull_request:
     types: [closed, assigned, opened, reopened]
 
