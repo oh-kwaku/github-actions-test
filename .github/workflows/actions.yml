@@ -26,9 +26,13 @@ on:  # we need to specify event as object instead of array so that we can set th
 
 
 jobs:
+  
   run-github-actions:
     runs-on: ubuntu-latest
     steps:
+      - name: payload
+       # how to retrive client payload from repository_dispatch event
+        run: echo ${{github.event.client_payload.env}}
       - name: "list files"
         run: |
             pwd
