@@ -20,7 +20,7 @@ on:  # we need to specify event as object instead of array so that we can set th
    # NB: Security token needs to be generated before use otherwise 404 Not found would be returned. 
    # 
   repository_dispatch:
-    event_type: build
+    types: [build]
   pull_request:
     types: [closed, assigned, opened, reopened]
 
