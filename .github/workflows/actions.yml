@@ -15,7 +15,12 @@ on:  # we need to specify event as object instead of array so that we can set th
     ## NB: the shortest interval  is once every 5 minutes
    # -  cron: "0/5 * * * *"  # this runs every  5 minues
   #  - cron: "0/6 * * * *" # this runs every 6 minutes
-  repository_dispatch: # this fires everytime a post request is sent to  a repo url (eg. github.com/username/repo/dispatch)
+
+   #repository_dispatch: this fires everytime a post request is sent to  a repo url (eg. https://api.github.com/repos/username/repo/dispatches)
+   # NB: Security token needs to be generated before use otherwise 404 Not found would be returned. 
+   # 
+  repository_dispatch:
+    event_type: build
   pull_request:
     types: [closed, assigned, opened, reopened]
 
