@@ -1,0 +1,15 @@
+name: decrypt
+on: [push]
+jobs:
+  decrypt-job:
+    runs-on: ubuntu-latest
+     
+    steps:
+    - uses: actions/checkout@v1
+    - name: decrypt-step
+      run: gpg --batch --quiet --yes --decrypt --passphrase="${{secrets.PASS_PHRASE}}" --output $HOME/secret.json secret.json.gpg
+      env:
+        PASSPHRASE: ${{secrets.PASS_PHRASE}}
+    - name: print file content
+       # cat command prints the content of an input file
+      run: cat $HOME/secret.json

@@ -9,7 +9,16 @@
 name: actions workflow
 
 on:  # we need to specify event as object instead of array so that we can set the specific type of event that triggers the workflow
- # push: # push does not have any type
+  push: # push does not have any type
+    branches: #
+      - master
+      - 'feature/*' # we can also use pattern matching here. This matches all branches with name eg .feature/feature a, feature b etc
+      - '!feature/featc' # ! in name witl ignore this branch.
+    tags: #  
+     - v1. # we can also use tags
+    paths:
+      - ".." # we can use paths here too
+      
   #schedule:
     ## this has the template of ( * * * * *) minute hour day month [day of week]. Check www.crontab.guru for usage
     ## NB: the shortest interval  is once every 5 minutes
