@@ -1,6 +1,14 @@
 name: contexts
 on: [pull_request]
 jobs:
+  functions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: dump
+        run: |
+          echo ${{contains('hello','li')}}
+          echo ${{startsWith('hello','he')}}
+          echo ${{format('Hello {0} {1} {2}','World','!','!')}}
   one:
     runs-on: ubuntu-latest
     steps:
@@ -12,3 +20,5 @@ jobs:
        env: 
          STEPS_CONTEXT: ${{toJson(steps)}}
        run: echo "$STEPS_CONTEXT"
+
+  
