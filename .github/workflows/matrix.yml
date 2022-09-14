@@ -6,7 +6,7 @@ jobs:
     steps:
       # first we want to look at the installed node js on the vm
       - name: log node node-version
-        run: node-v
+        run: node -v
 
         # we are setting up node version 6 for this step
       - uses: actions/setup-node@v1
@@ -14,4 +14,4 @@ jobs:
           node-version: '6'
           # see version after setup
       - name: log node version again
-        run: node-v
+        run: node -v
