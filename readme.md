@@ -1,6 +1,7 @@
 # github-actions-test
 
 You use "needs" to enable a to wait untle another job(s) completes.
+- with parameter on an action enables us to supply values to the action.
 
  
 > Encrypt /Decrypt File
@@ -24,5 +25,7 @@ You use "needs" to enable a to wait untle another job(s) completes.
   Add and set "continue-on-error" property  to "true" on a task to enable it continue even if there's an error
   Use "time-out" property to cancel a job or step after the specified value. get time-out: 360; 360 is default value
 
->21. Using the setup-node Action
+>21. Using the setup-node Action:
+  We can change the default version of node js for a step using the setup node actions
+  
   
