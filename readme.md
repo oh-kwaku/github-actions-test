@@ -26,6 +26,30 @@ You use "needs" to enable a to wait untle another job(s) completes.
   Use "time-out" property to cancel a job or step after the specified value. get time-out: 360; 360 is default value
 
 >21. Using the setup-node Action:
-  We can change the default version of node js for a step using the setup node actions
+  > We can change the default version of node js for a step using the setup node actions
   
-  
+>22. Creating a Matrix for Running a Job with Different Environments
+  > If we want to run a job different times on different versions of lets say node js ie. versions 6,8,10, instead of creating separate steps and repeating the same code, we can use matrix to do that. You add matrix to a job like
+    >jobs:
+      node-version:
+        strategy:
+          matrix:
+            os: [macos-latest, windows-latest, ubuntu-latest]
+            node_version: [6,8,10]
+          fail-fast: true # set fail-fast to true to immediately exit the job if execution fails for the current matrix iteration;
+        max-parallel: 0  # use max-parallel to limit the number of jobs that are running in the current matrix
+         runs-on: ${{matrix.os}}
+      steps:
+      # first we want to look at the installed node js on the vm
+        - name: log node node-version
+        run: node -v
+
+        # we are setting up node version 6 for this step
+        - uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.node_version}}
+          # see version after setup
+        - name: log node version again
+        run: node -v
+
+  In the above code we specified variables for the matrix property to be used in jobs. ie. node_verion, os etc. Jobs will be run for each of the values of the variables of the matrix property. The example code above will run nine (9) times. ie. one for  macos-lates running node versions 6,8,10 then for windows running the specified versions of node js the same for unbuntu.

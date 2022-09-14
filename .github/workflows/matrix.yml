@@ -2,7 +2,12 @@ name: matrix
 on: push
 jobs:
   node-version:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [6,8,10]
+        os: [macos-latest,ubuntu-latest, windows-latest]
+      
+    runs-on: ${{matrix.os}}
     steps:
       # first we want to look at the installed node js on the vm
       - name: log node node-version
@@ -11,7 +16,7 @@ jobs:
         # we are setting up node version 6 for this step
       - uses: actions/setup-node@v1
         with:
-          node-version: '6'
+          node-version: ${{matrix.node_version}}
           # see version after setup
       - name: log node version again
         run: node -v
