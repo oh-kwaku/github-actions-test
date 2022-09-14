@@ -21,7 +21,7 @@ jobs:
       IS_UBUNTU_8: ${{matrix.is_ubuntu_8}}
     steps:
       - name: test is_ubuntu_8
-        run: echo $IS_UBUNTU_8
+        run: echo ${IS_UBUNTU_8}
       # first we want to look at the installed node js on the vm
       - name: log node node-version
         run: node -v
