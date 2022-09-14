@@ -6,9 +6,22 @@ jobs:
       matrix:
         node_version: [6,8,10]
         os: [macos-latest,ubuntu-latest, windows-latest]
+        exclude:
+          - os: ubuntu-latest
+            node_version: 6
+          - os: macos-latest
+            node_version: 8
+        include: 
+          - os: ubuntu-latest
+            node_version: 8
+            is_ubuntu_8: "true"
       
     runs-on: ${{matrix.os}}
+    env:
+      IS_UBUNTU_8: ${{matrix.is_ubuntu_8}}
     steps:
+      - name: test is_ubuntu_8
+        run: echo $IS_UBUNTU_8
       # first we want to look at the installed node js on the vm
       - name: log node node-version
         run: node -v

@@ -53,3 +53,25 @@ You use "needs" to enable a to wait untle another job(s) completes.
         run: node -v
 
   In the above code we specified variables for the matrix property to be used in jobs. ie. node_verion, os etc. Jobs will be run for each of the values of the variables of the matrix property. The example code above will run nine (9) times. ie. one for  macos-lates running node versions 6,8,10 then for windows running the specified versions of node js the same for unbuntu.
+
+  > 23. Including and excluding Matrix configurations
+     We can skip running  jobs for some specified values of the variables of a matrix using the "exclude" property of a matrix like so
+      > exclude:
+          - os: ubuntu-latest
+            node_version: 6
+          - os: macos-latest
+            node_version:8
+      Here when the previous job in (22) will skip when 
+        - 1. os is ubuntu-latest and node_version is 6
+        - 2. When os is macos-latest and node_version is 8
+
+    We can use "include" property to define variables that are only available for some specified values of the matrix's variables. NB: Include is not use to add additional values for a matrix variable value.
+      > include: 
+          - os: ubuntu-latest
+            node_version:8
+            is_ubuntu_8: "true"
+      the above code declares variable is_ubuntu_8 which is only available as environment variable with the matrix iterations has unbuntu-lates for os  and node_version is 8. The "is_ubuntu_8" value is true when the specified condition is met otherwise it will be null or empty string
+        
+
+        
+        
