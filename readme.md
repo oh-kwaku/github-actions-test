@@ -127,6 +127,19 @@ uses: docker://node:12.14.1-alpine3.10
 with: 
   entrypoint: `/bin/echo'
   args: ''Hello world'
+```
+# 28. Creating our own executable file and running it in our steps
+we can pass a path to entrypoint to run our custom executable file. Here we are passing path to our script "script.sh". since we are accessing file we need to clone our repo using
+```
+uses: actions/checkout@v1
+```
+NB: In order to make our script file executable we need to run the command "chomd +x [path to our script file] before committing the file
+```
+chomd +x script.sh
+```
+
+
+
 
         
         

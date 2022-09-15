@@ -20,4 +20,11 @@ jobs:
         with:
           entrypoint: '/usr/local/bin/node'
           args: -v
+      - uses: actions/checkout@v1 # we need to clone the repo inorder to have access to the script file we're to execute
+      - name: step with docker-steps
+        uses: docker://node:12.14.1-alpine3.10
+        with:
+          entrypoint: ./script.sh
+          args: "some string"
+      
           
