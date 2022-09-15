@@ -137,8 +137,11 @@ NB: In order to make our script file executable we need to run the command "chom
 ```
 chomd +x script.sh
 ```
-
-
+NB: failure to execute the above command before commit will cause the following error in the container
+```
+docker: Error response from daemon: failed to create shim: OCI runtime create failed: container_linux.go:380: starting container process caused: exec: "./script.sh": permission denied: unknown
+```
+the linux "chmod" command enables permissions to the script file
 
 
         
