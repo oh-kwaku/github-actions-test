@@ -143,6 +143,20 @@ docker: Error response from daemon: failed to create shim: OCI runtime create fa
 ```
 the linux "chmod" command enables permissions to the script file
 
+# 29. Sending a slack message using a docker container
+we will be using the docker container "https://hub.docker.com/r/technosophos/slack-notify" to send slack messages.
+the following environment variables are required
+```
+SLACK_WEBHOOK:
+SLACK_MESSAGE: 
+```
+to create slack webhook go to "https://api.slack.com/apps" then click on "create an App"
 
+Click on incoming webhooks and turn it on
+
+Click on add new webhook to workspace
+
+Select the channel to post messages to then click allow
         
+NB: Slack will reject sending the message if you assign the webhook link directly to "SLACK_WEBHOOK". we will have to put it in secret
         
