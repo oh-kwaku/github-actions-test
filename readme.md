@@ -73,18 +73,31 @@ You use "needs" to enable a to wait untle another job(s) completes.
       the above code declares variable is_ubuntu_8 which is only available as environment variable with the matrix iterations has unbuntu-lates for os  and node_version is 8. The "is_ubuntu_8" value is true when the specified condition is met otherwise it will be null or empty string
         
 >24. Using docker containers in jobs
-  >container property of job is used to setup and run container for a job in the format
-    container:[docker hub username]:image
+      container property of job is used to setup and run container for a job in the format
+        container:[docker hub username]:image
       so if we want to run node on alpine we will do
-        > conainter:node:13.5.0-alpine3.10
-  >we can also pass container property as object in the format
-    conatiner:
-      image: 13.5.0-alpine3.10
-      env: some environment variables
-      ports: array of ports we want to expose in the container
-      volumes: volumes we want to map in our  virtual machine
-      options: options we want to use in docker create
-  NB: when we use containers, the job steps are run inside of the container and not in the job runner's virtual machine
+         conainter:node:13.5.0-alpine3.10
+    >we can also pass container property as object in the format
+        conatiner:
+          image: 13.5.0-alpine3.10
+          env: some environment variables
+          ports: array of ports we want to expose in the container
+          volumes: volumes we want to map in our  virtual machine
+          options: options we want to use in docker create
+    NB: when we use containers, the job steps are run inside of the container and not in the job runner's virtual machine
+  > We can  also run containers for each step in our job. Containers can also be run as services
+  >Running containers as services
+    If we want to run containers as services we can use the services property of jobs. in this case we will not use the container property. You specify that in the format:
+        > services: 
+            app:
+              build: [use image that is published on docker hub here]
+              ports:
+                - 3001:3000
+            mongo:
+              image: mongo
+              ports:
+                - "27001:27001"
+      
 
 
         
