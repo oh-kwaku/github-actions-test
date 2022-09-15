@@ -18,6 +18,6 @@ jobs:
       - name: step with docker-steps
         uses: docker://node:12.14.1-alpine3.10
         with:
-          entrypoint: 'node '
+          entrypoint: '/usr/local/bin/node'
           args: -v
           
