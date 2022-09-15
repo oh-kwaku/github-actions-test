@@ -4,7 +4,7 @@ You use "needs" to enable a to wait untle another job(s) completes.
 - with parameter on an action enables us to supply values to the action.
 
  
-> Encrypt /Decrypt File
+# Encrypt /Decrypt File
   - To decrypt file 
     - use command: gpg --symmetric --cipher-algo AES256 filename
   - TO decrypt file 
@@ -29,8 +29,9 @@ You use "needs" to enable a to wait untle another job(s) completes.
   > We can change the default version of node js for a step using the setup node actions
   
 # 22. Creating a Matrix for Running a Job with Different Environments
-  > If we want to run a job different times on different versions of lets say node js ie. versions 6,8,10, instead of creating separate steps and repeating the same code, we can use matrix to do that. You add matrix to a job like
-    >jobs:
+  If we want to run a job different times on different versions of lets say node js ie. versions 6,8,10, instead of creating separate steps and repeating the same code, we can use matrix to do that. You add matrix to a job like
+ ```   
+    jobs:
       node-version:
         strategy:
           matrix:
@@ -51,8 +52,8 @@ You use "needs" to enable a to wait untle another job(s) completes.
           # see version after setup
         - name: log node version again
         run: node -v
-
-  In the above code we specified variables for the matrix property to be used in jobs. ie. node_verion, os etc. Jobs will be run for each of the values of the variables of the matrix property. The example code above will run nine (9) times. ie. one for  macos-lates running node versions 6,8,10 then for windows running the specified versions of node js the same for unbuntu.
+```
+In the above code we specified variables for the matrix property to be used in jobs. ie. node_verion, os etc. Jobs will be run for each of the values of the variables of the matrix property. The example code above will run nine (9) times. ie. one for  macos-lates running node versions 6,8,10 then for windows running the specified versions of node js the same for unbuntu.
 
 # 23. Including and excluding Matrix configurations
 We can skip running  jobs for some specified values of the variables of a matrix using the "exclude" property of a matrix like so
@@ -99,20 +100,33 @@ conatiner:
 ** NB**: when we use containers, the job steps are run inside of the container and not in the job runner's virtual machine
 
 We can  also run containers for each step in our job. Containers can also be run as services
-### Running containers as services
+## Running containers as services
 If we want to run containers as services we can use the services property of jobs. in this case we will not use the container property. You specify that in the format:
 ```
-       > services: 
-            app:
-              build: [use image that is published on docker hub here]
-              ports:
-                - 3001:3000
-            mongo:
-              image: mongo
-              ports:
-                - "27001:27001"
+services: 
+  app:
+  build: [use image that is published on docker hub here]
+  ports:
+    - 3001:3000
+  mongo:
+    image: mongo
+    ports:
+      - "27001:27001"
  ```
-### Running docker containers in Individual steps
+## Running docker containers in Individual steps
+We can also run docker container for each job step using the "uses" property of the step. eg.
+```
+steps:
+  - name: use docker in the step
+    uses: docker://node:12.14.1-alpine3.10
+```
+we values to the docker parameters 
+```
+...
+uses: docker://node:12.14.1-alpine3.10
+with: 
+  entrypoint: `/bin/echo'
+  args: ''Hello world'
 
         
         
