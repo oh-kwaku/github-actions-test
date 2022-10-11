@@ -158,5 +158,108 @@ Click on add new webhook to workspace
 
 Select the channel to post messages to then click allow
         
-NB: Slack will reject sending the message if you assign the webhook link directly to "SLACK_WEBHOOK". we will have to put it in secret
-        
+NB: Slack will reject sending the message if you assign the webhook link directly to "SLACK_WEBHOOKls
+". we will have to put it in secret
+
+# 30. Creating a ReactJS Boilerplate Application
+When running npm test command set "CI=true" on terminal to avoid interactive terminal in our workflow.
+We used "surge" to deploy static website.
+NB: Installing surge requires permissions. use sudo 
+```
+sudo install -global surge   
+```
+
+# 31 Using prettier to Check for Code formmating Rules
+- Go to "https://prettier.io/playground/" then make formatting configurations you want. 
+- click on copy configuration. 
+- create and paste the configuration a file in the project that you want the formatting rules to be applied to with name ".prettierrc"
+- Also create ".prettierignore" and add files or folders that need to be ignored
+Execute 
+```
+npx prettirer --check "**/*.js"
+``` 
+to check for files that do not conform to the formatting configurations
+
+execute
+```
+npx prettirer --write "**/*.js"
+```
+to allow prettier format files. NB "**/*.js" is pattern
+- scripts section of package.json add
+```
+ "format":"prettier --check \"**/*.js\""
+ "format":"prettier --check \"**/*.js\""
+ ```
+ # 34 Let's discuss our workflow plan
+   - Feature branch
+     - Install dependencies
+     - check code formatting
+     - Run automated tests
+     - Update code coverage report as an artifact
+     - Cache dependencies: this reduces time to install dependencies next time the workflow is run
+   - Develop branch
+     - Install dependencies
+     - Check code formatting
+     - Run automated tests
+     - Upload code coverage as artifact
+     - Build project
+     - Upload build as an artifact
+     - Deploy to staging server
+     - cache depencies
+   -  Master branch
+     - Check code formatting
+     -  Run automated tests
+     - Updload code covarage as an artifact
+     - Build project
+     - Upload build as an artifact
+     - Create a release
+     - Deploy to production server
+     - upload coverage to codecov
+     - cache dependencies
+
+  ## Automations
+      - Job Failure -> Create Issue
+      - Issue created -> Send a slack message
+      - Release created -> Send a slack Message
+# 35 Setting up our repository
+You can "CODEOWNERS" file in ".github" folder to specify which files or extensions are owned by which user.
+Code owners are required to review files
+
+# 36 Setting the develop  pull request workflow
+
+# 37 Creating the develop merge pull requests workflow
+
+# 38 Caching NPM Dependencies
+  we can use the actions/cache@v1 action to cache dependencies. Caches are saved under keys. Use the key param to specify a key for your cache. The key will also be used to retrieve that cache. 
+
+  ```
+    uses: actions/cache@v1
+    with: 
+      path: ~/.npm
+      key: myCacheKey
+  ```
+
+  the cache key can be static (as in the above code) or dynamic (using an expression as below)
+
+   ```
+    uses: actions/cache@v1
+    with: 
+      path: ~/.npm
+      key: ${{runner.os}}node-${{hashFiles('**/package-lock.json')}}
+  ```
+
+  in the above code, were generating a dynamic cache key when   package.lock.json file changes by hashing that file and using the hash value as part of the key and also we are including the operating system that the runner is being run on. 
+    We can also use restore-key param to let github know which keys to restore packages at if  not caches are found with the main key (the value of the key param).
+  ```
+   with: 
+     key:  ${{runner.os}}node-${{hashFiles('**/package-lock.json')}}
+     restore-key: |
+      ${{runner.os}}-node-
+  ```
+
+
+
+
+
+
+  
