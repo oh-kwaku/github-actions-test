@@ -262,7 +262,7 @@ Code owners are required to review files
  use the actions "actions/upload-artifact@v1" to upload artifacts. 
  ```
   - name: updload artifacts
-    uses: actions/upload-artifacts@v1
+    uses: actions/upload-artifact@v1
       with:
         name: any name you want
         path: the path of the artifacts to upload 
