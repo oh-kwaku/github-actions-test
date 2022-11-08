@@ -272,6 +272,43 @@ there's also action in the actions repository to download artifacts in your work
     actions/download-artifact
 ```
 
+# 42 Semantic versioning & Conventional commits
+  When we create a new release of our project how are going to know which part of semantic versioning that we need to update? 
+    ans: We would know from our commit messages. We use a convention called conventional commits. Conventional commits helps us know if a bug is fixed or added a new feature or had a breaking change and by following the convention in our commit messages, we are able to know how to update our semantic versioning.
+Format of conventional commit
+  <type>[optional scope]: <desscription>
+    type: can be [fix, feature, docs, etc]
+    scope: it is optional and describes the scope that a change affected. eg. Cart, employee etc
+    description: any message you like
+    body: it is optional
+    footage: it is optional
+eg
+```
+fix(cart): changed our endpoint
+BREAKING CHANGE: changed cart endpoint
+closes issue #2
+```
+  type: fix
+  scope: cart
+  body: "BREAKING CHANGES" signals semantic version to change the major part of the current version eg. 2.1.2 will be 3.0.0
 
+another example
+```
+feat(auth): added facebook authentication
+```
+
+  type: feat, meaning feature
+  scope: auth
+in this example the type is feature, meaning a feature is added and there's no breaking change so only the minor part of the semantic version will be changed eg. 2.1.1 will be 2.2.0
+
+other examples
+```
+docs(auth): facebook authentication added
+```
+
+```
+ci: added a new workflow
+```
+we can also specify type of "ci" to show that we committed something that affected ci
 
   
