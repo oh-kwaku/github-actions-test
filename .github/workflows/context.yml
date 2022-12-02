@@ -9,11 +9,11 @@ jobs:
           echo ${{contains('hello','li')}}
           echo ${{startsWith('hello','he')}}
           echo ${{format('Hello {0} {1} {2}','World','!','!')}}
-          eccho "this step is intentionally to fail in order to test functions"
+          echo "this step is intentionally to fail in order to test functions"
       - name: test failure functions
         if: failure()
         run: echo "previous step failed but we able to execute this step by adding failure() function"
-      - name: run after previous filure
+      - name: run after previous failure
         if: always()
         run: echo "previous step filed but this step was run"
   one:

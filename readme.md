@@ -273,6 +273,7 @@ there's also action in the actions repository to download artifacts in your work
 ```
 
 # 42 Semantic versioning & Conventional commits
+ repo: https://github.com/semantic-release/semantic-release/blob/master/docs/usage/plugins.md
   When we create a new release of our project how are going to know which part of semantic versioning that we need to update? 
     ans: We would know from our commit messages. We use a convention called conventional commits. Conventional commits helps us know if a bug is fixed or added a new feature or had a breaking change and by following the convention in our commit messages, we are able to know how to update our semantic versioning.
 Format of conventional commit
@@ -310,5 +311,23 @@ docs(auth): facebook authentication added
 ci: added a new workflow
 ```
 we can also specify type of "ci" to show that we committed something that affected ci
+## Installing Semantic version ()
+ There's a package called semantic release which provides cli  that we can run CI on our workflow. It can take care of analyzing workflow and generating a new release with a version based on messages in our commit messages
+ To install
+ ```
+npm install --save-dev semantic-release
+ ```
+After installing create a new file called 'release.config.js'
+  in the file export an object that will contain the configuration  
 
-  
+## Running semantic-release in our Workflows.
+  once we have our semantic release configured, we need to run it on our CI.
+```
+ - name: create a release
+        run: npm semantic-release
+        env: 
+          GITHUB_TOKEN:${{secrets.GITHUB_TOKEN}}
+        
+```
+
+# Deploy to production when pushing to Master
