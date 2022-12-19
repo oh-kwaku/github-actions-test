@@ -63,7 +63,7 @@ jobs:
           pwd
           ls -a
             
-      - name: hellow world js actions 
+      - name: hello world js actions 
         id: greet # if wee need to reference a step in another it should be given an id
 
         # reference to an action; here we're using an action that is published on public github repo.
