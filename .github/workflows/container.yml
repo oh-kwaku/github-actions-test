@@ -1,0 +1,35 @@
+name: container
+on: push
+jobs:
+  docker-steps:
+    runs-on: ubuntu-latest
+    container: 
+      image: node:13.5.0-alpine3.10
+    steps:
+      - name: log node version
+        run: |
+          node -v
+          cat /etc/os-release
+      - name: step with docker-steps
+        uses: docker://node:12.14.1-alpine3.10
+        with:
+          entrypoint: '/bin/echo'
+          args: 'Hello world'
+      - name: step with docker-steps
+        uses: docker://node:12.14.1-alpine3.10
+        with:
+          entrypoint: '/usr/local/bin/node'
+          args: -v
+      - uses: actions/checkout@v1 # we need to clone the repo inorder to have access to the script file we're to execute
+      - name: step with docker-steps
+        uses: docker://node:12.14.1-alpine3.10
+        with:
+          entrypoint: ./script.sh
+          args: "some string"
+      - name: send a slack message
+        uses: docker://technosophos/slack-notify
+        env:
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+          SLACK_MESSAGE: "Hello from my github actions"
+      
+          
